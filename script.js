@@ -141,16 +141,18 @@ if (slideEl) {
 }
 
 // ----------------------
-// Review slideshow (6 reviews)
+// Review slideshow (8 reviews)
 // ----------------------
 const reviews = [
-  { text: "Car looked brand new inside and out. Highly recommend.", name: "— Sarah K." },
-  { text: "Very professional and on time. The attention to detail was impressive.", name: "— Mark D." },
-  { text: "Booked last minute and they still delivered amazing results.", name: "— Alex P." },
-  { text: "Interior was spotless and smelled fresh. Worth every dollar.", name: "— Jasmine R." },
-  { text: "Reliable, polite, and the work quality was top tier.", name: "— Kevin S." },
-  { text: "Our work vehicle fleet looks consistently clean now.", name: "— Daniel M." },
-];
+  { text: "My 2009 Honda Civic looks so much better than before. Highly recommend trusting them with your vehicle.", name: "— Dipanshu C." },
+  { text: "Called in a panic for a last-minute detail and they delivered — even fixed brutal winter salt stains on the mats.", name: "— Rishi U." },
+  { text: "Contacted them on a Saturday, they came the next day. My SUV looks brand new after 4+ hours of work.", name: "— Ashley H." },
+  { text: "The team at 47 Nova Autos took great care of my truck — showed up on time and worked through the rain.", name: "— Chad B." },
+  { text: "Best prices, best customer service, best cleaning. They worked through rain and darkness with a smile.", name: "— Ben L." },
+  { text: "Great job — car smells amazing, and $20 less than most while being more thorough.", name: "— Armanda L." },
+  { text: "Got the Advanced Interior package and I'm 100% satisfied. Professional work done by the team.", name: "— Parmbir S." },
+  { text: "Spent 5 hours detailing my car — it looks brand new. Highly recommend 47 Nova Autos.", name: "— Jeff R." },
+    ];
 
 let reviewIndex = 0;
 const reviewTextEl = document.getElementById("reviewText");
