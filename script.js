@@ -75,6 +75,12 @@ const slides = [
   "images/slide-3.jpg",
 ];
 
+const slideAlts = [
+  "Freshly cleaned Ford truck interior and dashboard after mobile detailing in Halifax",
+  "Detailed black leather SUV interior after professional car detailing",
+  "Cleaned Honda Civic interior and dashboard after mobile auto detailing",
+  ];
+
 let slideIndex = 0;
 // The hero slideshow in index.html is an <img id="slideImg">.
 // So we swap the image src (instead of setting a background image).
@@ -106,7 +112,7 @@ function showSlide() {
   if (!slideEl) return;
   slideEl.src = slides[slideIndex];
   // Optional: keep the alt a bit more descriptive for accessibility.
-  slideEl.alt = `Project photo ${slideIndex + 1} of ${slides.length}`;
+  slideEl.alt = slideAlts[slideIndex] || `Project photo ${slideIndex + 1} of ${slides.length}`;
   renderDots();
 }
 
