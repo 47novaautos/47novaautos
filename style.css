@@ -18,6 +18,7 @@ body{
   background:var(--bg);
   color:var(--text);
   line-height:1.45;
+  text-align:center;
 }
 
 a{color:inherit;text-decoration:none}
@@ -38,7 +39,7 @@ h2{font-size:clamp(24px,2.2vw,34px);letter-spacing:-.02em}
 h3{font-size:18px}
 p{margin:0 0 12px}
 .muted{color:var(--muted)}
-.lead{color:var(--muted);max-width:70ch}
+.lead{color:var(--muted);max-width:70ch;margin:0 auto}
 .micro{color:var(--muted);font-size:13px;margin-top:10px}
 .subtle{opacity:.85}
 
@@ -50,7 +51,7 @@ p{margin:0 0 12px}
 }
 .header-inner{
   max-width:1120px;margin:0 auto;padding:12px 18px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
 }
 .brand{display:flex;align-items:center}
 .brand-logo{height: 64px;width:auto;border-radius:12px;box-shadow:var(--shadow)}
@@ -121,7 +122,7 @@ p{margin:0 0 12px}
   padding:16px;
   box-shadow:0 10px 28px rgba(0,0,0,.35);
 }
-.card ul{margin:12px 0 14px;padding-left:18px;color:var(--muted)}
+.card ul{margin:12px 0 14px;padding-left:0;list-style-position:inside;color:var(--muted)}
 .card li{margin:6px 0}
 .price{font-size:28px;font-weight:850;letter-spacing:-.02em;margin-top:4px}
 .label{font-size:12px;color:var(--muted);margin-top:6px}
@@ -163,7 +164,7 @@ p{margin:0 0 12px}
 .trust-text{color:var(--muted);font-size:13px;margin-top:6px}
 .authority{margin-top:16px;color:var(--muted);font-weight:650}
 
-.fleet-copy{color:var(--muted);max-width:80ch}
+.fleet-copy{color:var(--muted);max-width:80ch;margin:0 auto}
 
 .form{
   border:1px solid var(--border);
@@ -183,7 +184,7 @@ p{margin:0 0 12px}
   background:rgba(0,0,0,.22);
 }
 .fieldset legend{padding:0 6px;color:var(--text);font-weight:850}
-.radio,.check{display:flex;align-items:center;gap:10px;color:var(--muted);margin:10px 0}
+.radio,.check{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted);margin:10px 0}
 .fieldset label{display:block;color:var(--muted);font-size:13px;margin-top:10px}
 input[type="text"],input[type="tel"],input[type="email"]{
   width:100%;
@@ -230,11 +231,11 @@ input:focus{border-color:rgba(255,42,42,.65)}
 
 .two-lines{
   margin-top:16px;
-  display:flex;flex-wrap:wrap;gap:10px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
   color:var(--muted);
 }
 
-.rating{display:flex;align-items:center;gap:10px;margin-top:10px}
+.rating{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
 .stars{color:var(--red);letter-spacing:.08em}
 .rating-text{color:var(--muted);font-weight:750}
 .review-cards{
@@ -251,7 +252,7 @@ input:focus{border-color:rgba(255,42,42,.65)}
 }
 .review p{color:var(--text);margin:0 0 10px}
 .reviewer{color:var(--muted);font-size:13px}
-.review-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.review-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}
 
 .cta-inner{text-align:center}
 .cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px}
@@ -260,7 +261,7 @@ input:focus{border-color:rgba(255,42,42,.65)}
   border-top:1px solid var(--border);
   padding:26px 0 34px;
 }
-.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer-inner{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
 .footer-brand{font-weight:900;font-size:16px}
 .footer-sub{color:var(--muted);font-size:13px;margin-top:6px}
 .footer-link{
