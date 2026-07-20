@@ -67,84 +67,9 @@ document.querySelectorAll("[data-booking]").forEach((el) => {
 });
 
 // ----------------------
-// Slideshow (hero background)
-// ----------------------
-const slides = [
-  "images/slide-1.jpg",
-  "images/slide-2.jpg",
-  "images/slide-3.jpg",
-];
 
-const slideAlts = [
-  "Freshly cleaned Ford truck interior and dashboard after mobile detailing in Halifax",
-  "Detailed black leather SUV interior after professional car detailing",
-  "Cleaned Honda Civic interior and dashboard after mobile auto detailing",
-  ];
 
-let slideIndex = 0;
-// The hero slideshow in index.html is an <img id="slideImg">.
-// So we swap the image src (instead of setting a background image).
-const slideEl = document.getElementById("slideImg");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const dotsWrap = document.getElementById("dots");
 
-function renderDots() {
-  if (!dotsWrap) return;
-  dotsWrap.innerHTML = "";
-  slides.forEach((_, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "dot" + (i === slideIndex ? " active" : "");
-    b.setAttribute("aria-label", `Go to slide ${
-      i + 1
-    }`);
-    b.addEventListener("click", () => {
-      slideIndex = i;
-      showSlide();
-      restartAuto();
-    });
-    dotsWrap.appendChild(b);
-  });
-}
-
-function showSlide() {
-  if (!slideEl) return;
-  slideEl.src = slides[slideIndex];
-  // Optional: keep the alt a bit more descriptive for accessibility.
-  slideEl.alt = slideAlts[slideIndex] || `Project photo ${slideIndex + 1} of ${slides.length}`;
-  renderDots();
-}
-
-function nextSlide() {
-  slideIndex = (slideIndex + 1) % slides.length;
-  showSlide();
-}
-
-function prevSlide() {
-  slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-  showSlide();
-}
-
-if (prevBtn) prevBtn.addEventListener("click", () => {
-  prevSlide();
-  restartAuto();
-});
-if (nextBtn) nextBtn.addEventListener("click", () => {
-  nextSlide();
-  restartAuto();
-});
-
-let autoTimer = null;
-function restartAuto() {
-  if (autoTimer) window.clearInterval(autoTimer);
-  autoTimer = window.setInterval(nextSlide, 6000);
-}
-
-if (slideEl) {
-  showSlide();
-  restartAuto();
-}
 
 // ----------------------
 // Review slideshow (8 reviews)
