@@ -214,3 +214,128 @@ if (fleetForm) {
     if (ok) fleetForm.reset();
   });
 }
+
+// ----------------------
+// Service coverage map (Leaflet, lazy-loaded)
+// ----------------------
+const COVERAGE_AREAS = {"halifax":[[44.681,-63.7227],[44.6567,-63.7148],[44.6476,-63.689],[44.6542,-63.6802],[44.6468,-63.6778],[44.6399,-63.6623],[44.6442,-63.6467],[44.6396,-63.6384],[44.6307,-63.6378],[44.6144,-63.6523],[44.6104,-63.6293],[44.592,-63.6491],[44.5888,-63.6455],[44.5871,-63.6349],[44.5953,-63.6252],[44.5812,-63.6013],[44.5818,-63.5924],[44.6046,-63.5606],[44.6277,-63.5427],[44.6538,-63.5626],[44.6822,-63.6219],[44.7112,-63.6588],[44.7013,-63.6779],[44.7036,-63.6848],[44.6949,-63.6875],[44.681,-63.7227]],"dartmouth":[[44.6991,-63.6402],[44.6822,-63.6219],[44.6538,-63.5626],[44.6277,-63.5427],[44.632,-63.5245],[44.6424,-63.5191],[44.64,-63.5175],[44.6438,-63.5131],[44.649,-63.5184],[44.6526,-63.5003],[44.6564,-63.502],[44.6583,-63.4956],[44.6708,-63.5052],[44.6711,-63.5006],[44.6796,-63.5052],[44.6814,-63.4955],[44.6945,-63.4991],[44.7175,-63.5309],[44.7292,-63.538],[44.7322,-63.5451],[44.7292,-63.5506],[44.7412,-63.5616],[44.7356,-63.5654],[44.7272,-63.6045],[44.7025,-63.6215],[44.6991,-63.6402]],"bedford":[[44.7214,-63.7331],[44.713,-63.7201],[44.7084,-63.7222],[44.7092,-63.7307],[44.7048,-63.7294],[44.6927,-63.7099],[44.6973,-63.7002],[44.6937,-63.6901],[44.6993,-63.6894],[44.7014,-63.6819],[44.7036,-63.6848],[44.7013,-63.6779],[44.7112,-63.6588],[44.6992,-63.6396],[44.7055,-63.618],[44.7171,-63.6099],[44.7277,-63.6288],[44.7409,-63.6028],[44.7579,-63.6259],[44.7597,-63.6406],[44.743,-63.6582],[44.753,-63.6686],[44.7505,-63.6755],[44.7585,-63.7018],[44.7214,-63.7331]],"sackville":[[44.7709,-63.7093],[44.7688,-63.704],[44.7646,-63.7033],[44.7612,-63.7057],[44.7576,-63.701],[44.7505,-63.6755],[44.753,-63.6686],[44.747,-63.658],[44.743,-63.6582],[44.7657,-63.6347],[44.7741,-63.6296],[44.7778,-63.6327],[44.7776,-63.6307],[44.7844,-63.6397],[44.7818,-63.6486],[44.7835,-63.6626],[44.7874,-63.6734],[44.7904,-63.671],[44.7917,-63.6863],[44.7945,-63.69],[44.7846,-63.6972],[44.7787,-63.6972],[44.774,-63.7003],[44.7741,-63.7064],[44.7709,-63.7093]]};
+
+const AREA_NAMES = {
+  halifax: "Halifax",
+  dartmouth: "Dartmouth",
+  bedford: "Bedford",
+  sackville: "Lower Sackville",
+};
+
+const LEAFLET_CSS = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+const LEAFLET_JS = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+
+function loadAsset(tag, attrs) {
+  return new Promise((resolve, reject) => {
+    const el = document.createElement(tag);
+    Object.assign(el, attrs);
+    el.onload = () => resolve();
+    el.onerror = () => reject(new Error("asset failed"));
+    document.head.appendChild(el);
+  });
+}
+
+function initCoverageMap() {
+  const mapEl = document.getElementById("coverageMap");
+  const chipWrap = document.getElementById("areaChips");
+  const hint = document.getElementById("mapHint");
+  if (!mapEl || !chipWrap || typeof L === "undefined") return;
+
+  const isTouch = window.matchMedia("(hover: none)").matches;
+
+  const map = L.map(mapEl, {
+    scrollWheelZoom: false,
+    dragging: !isTouch,
+    tap: false,
+    zoomControl: true,
+    attributionControl: true,
+  });
+
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: "abcd",
+    maxZoom: 18,
+  }).addTo(map);
+
+  const BASE  = { color: "#ff2a2a", weight: 1.4, opacity: 0.55, fillColor: "#ff2a2a", fillOpacity: 0.10 };
+  const HIGH  = { color: "#ff2a2a", weight: 2.6, opacity: 1,    fillColor: "#ff2a2a", fillOpacity: 0.34 };
+
+  const layers = {};
+  const group = L.featureGroup().addTo(map);
+
+  Object.keys(COVERAGE_AREAS).forEach((key) => {
+    const poly = L.polygon(COVERAGE_AREAS[key], BASE);
+    poly.bindTooltip(AREA_NAMES[key] || key, {
+      className: "area-label",
+      sticky: true,
+      direction: "top",
+      opacity: 1,
+    });
+    poly.on("mouseover", () => setActive(key, false));
+    poly.on("mouseout", () => { if (!pinned) setActive("all", false); else setActive(pinned, false); });
+    poly.on("click", () => selectArea(key));
+    poly.addTo(group);
+    layers[key] = poly;
+  });
+
+  const allBounds = group.getBounds();
+  map.fitBounds(allBounds, { padding: [24, 24] });
+
+  let pinned = null;
+
+  function setActive(key, moveMap) {
+    Object.keys(layers).forEach((k) => {
+      layers[k].setStyle(key !== "all" && k === key ? HIGH : BASE);
+    });
+    chipWrap.querySelectorAll(".area-chip").forEach((c) => {
+      c.classList.toggle("is-active", c.dataset.area === key);
+    });
+    if (moveMap) {
+      if (key === "all") map.flyToBounds(allBounds, { padding: [24, 24], duration: 0.6 });
+      else if (layers[key]) map.flyToBounds(layers[key].getBounds(), { padding: [48, 48], duration: 0.6 });
+    }
+  }
+
+  function selectArea(key) {
+    pinned = key === "all" ? null : key;
+    setActive(key, true);
+    if (hint) hint.classList.add("is-hidden");
+  }
+
+  chipWrap.querySelectorAll(".area-chip").forEach((chip) => {
+    const key = chip.dataset.area;
+    chip.addEventListener("click", () => selectArea(key));
+    chip.addEventListener("mouseenter", () => { if (!isTouch && key !== "all") setActive(key, false); });
+    chip.addEventListener("mouseleave", () => { if (!isTouch) setActive(pinned || "all", false); });
+    chip.addEventListener("focus", () => { if (key !== "all") setActive(key, false); });
+  });
+
+  map.on("movestart", () => { if (hint) hint.classList.add("is-hidden"); });
+}
+
+const coverageSection = document.getElementById("coverage");
+if (coverageSection && "IntersectionObserver" in window) {
+  let started = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || started) return;
+      started = true;
+      io.disconnect();
+      Promise.all([
+        loadAsset("link", { rel: "stylesheet", href: LEAFLET_CSS }),
+        loadAsset("script", { src: LEAFLET_JS, async: true }),
+      ])
+        .then(() => initCoverageMap())
+        .catch(() => {
+          const shell = document.querySelector(".map-shell");
+          if (shell) shell.style.display = "none";
+        });
+    });
+  }, { rootMargin: "300px" });
+  io.observe(coverageSection);
+}
