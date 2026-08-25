@@ -463,3 +463,96 @@ input:focus{border-color:rgba(255,42,42,.65)}
   color:var(--muted);
   font-size:14px;
 }
+
+/* ---------- Service coverage ---------- */
+.area-chips{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:22px auto 16px;
+  max-width:880px;
+}
+.area-chip{
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  color:var(--muted);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:8px 15px;
+  cursor:pointer;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.area-chip:hover{color:var(--text);border-color:rgba(255,42,42,.55)}
+.area-chip:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.area-chip.is-active{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+.map-shell{
+  position:relative;
+  max-width:1000px;
+  margin:0 auto;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#0d0d0d;
+}
+.coverage-map{
+  height:440px;
+  width:100%;
+  background:#0d0d0d;
+}
+.coverage-map .leaflet-container{background:#0d0d0d;font:inherit}
+.coverage-map .leaflet-control-attribution{
+  background:rgba(0,0,0,.6);
+  color:#8a8a8a;
+  font-size:10px;
+}
+.coverage-map .leaflet-control-attribution a{color:#b0b0b0}
+.coverage-map .leaflet-bar a{
+  background:#151515;
+  color:var(--text);
+  border-bottom-color:var(--border);
+}
+.coverage-map .leaflet-bar a:hover{background:#222}
+.area-label{
+  background:rgba(10,10,10,.9);
+  border:1px solid rgba(255,42,42,.5);
+  border-radius:8px;
+  color:var(--text);
+  font-size:12px;
+  font-weight:750;
+  padding:3px 8px;
+  box-shadow:none;
+}
+.area-label::before{display:none}
+.map-hint{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:500;
+  background:rgba(10,10,10,.75);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:11px;
+  color:var(--muted);
+  pointer-events:none;
+  transition:opacity .3s;
+}
+.map-hint.is-hidden{opacity:0}
+.coverage-note{margin-top:20px}
+.coverage-note-title{font-weight:850;margin-bottom:6px}
+
+@media (max-width:720px){
+  .coverage-map{height:340px}
+  .area-chip{font-size:12px;padding:7px 12px}
+}
+
+/* Anchor targets clear the sticky header */
+html{scroll-padding-top:104px;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
