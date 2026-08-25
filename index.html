@@ -6,7 +6,7 @@
   <title>47 Nova Autos LTD — Mobile Auto Cleaning</title>
   <meta name="description" content="Professional mobile auto cleaning in Halifax & surrounding areas. Retail interior packages, exterior wash, and fleet & commercial cleaning plans." />
   <link rel="icon" href="images/logo.png" />
-  <link rel="stylesheet" href="style.css?v=1767111081" />
+  <link rel="stylesheet" href="style.css?v=1787696628" />
 </head>
 <body>
   <header class="header">
@@ -16,9 +16,11 @@
       </a>
 
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#fleet">Fleet Services</a>
         <a href="#reviews">Reviews</a>
+        <a href="#how">How It Works</a>
+        <a href="#services">Plans</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -29,14 +31,17 @@
     </div>
 
     <div class="mobile-menu" id="mobileMenu" hidden>
-      <a href="#services">Services</a>
-      <a href="#fleet">Fleet Services</a>
       <a href="#reviews">Reviews</a>
+      <a href="#how">How It Works</a>
+      <a href="#services">Plans</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
   </header>
 
   <main id="top">
+
     <section class="hero"><video class="hero-video" autoplay muted loop playsinline poster="images/hero-poster.jpg"><source src="videos/hero-loop.mp4" type="video/mp4"></video><div class="hero-overlay"></div>
       <div class="hero-inner container">
         <div class="hero-copy">
@@ -49,6 +54,68 @@
         </div>
 
         
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <h2>What Our Customers Say</h2>
+        <p class="lead">5-Star Rated on Google</p>
+
+        <div class="rating">
+          <span class="stars" aria-label="5 star rating">★★★★★</span>
+          <span class="rating-text">5.0 on Google</span>
+        </div>
+
+        
+        <div class="review-slider" id="reviewSlider" role="region" aria-live="polite" aria-label="Google reviews slideshow">
+          <div class="review-slide" id="reviewSlide">
+            <p id="reviewText">“Car looked brand new inside and out. Highly recommend.”</p>
+            <div class="reviewer" id="reviewName">— Customer</div>
+          </div>
+
+          <div class="review-controls">
+            <button class="chip" id="revPrevBtn" type="button" aria-label="Previous review">‹</button>
+            <div class="dots" id="revDots" aria-label="Review dots"></div>
+            <button class="chip" id="revNextBtn" type="button" aria-label="Next review">›</button>
+          </div>
+        </div>
+
+        <p class="micro subtle">5-Star Rated on Google.</p>
+        <div class="review-actions">
+          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=28+Higgins+Avenue,+Halifax,+NS" target="_blank" rel="noopener">View on Google</a>
+          <a class="btn ghost" href="https://www.instagram.com/47_novaautos" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how">
+      <div class="container">
+        <h2>How It Works</h2>
+        <p class="lead">Simple. Clear. Professional.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-title">Book or Request</div>
+            <div class="step-text">Book online for retail services, or submit a fleet request for commercial vehicles.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-title">We Come to You</div>
+            <div class="step-text">Mobile service available. Power access required. Drop-off also available at our location.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-title">Drive Clean</div>
+            <div class="step-text">Your vehicle is cleaned and ready to go — no hassle.</div>
+          </div>
+        </div>
+
+        <div class="two-lines">
+          <div>Serving Halifax and surrounding areas.</div>
+          <div>Drop-off available at <strong><a class="inline" href="https://www.google.com/maps/search/?api=1&query=28+Higgins+Avenue,+Halifax,+NS" target="_blank" rel="noopener">28 Higgins Avenue, Halifax, NS</a></strong>.</div>
+        </div>
       </div>
     </section>
 
@@ -113,35 +180,7 @@
       </div>
     </section>
 
-    <section class="section alt">
-      <div class="container">
-        <h2>Why Choose 47 Nova Autos LTD</h2>
-        <p class="lead">Consistent results. No shortcuts.</p>
-
-        <div class="trust">
-          <div class="trust-item">
-            <div class="trust-title">250+ Vehicles</div>
-            <div class="trust-text">Completed cleans and repeat clients.</div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-title">Local &amp; Reliable</div>
-            <div class="trust-text">Halifax-based service and clear communication.</div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-title">Professional Work</div>
-            <div class="trust-text">We show up ready and keep it consistent.</div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-title">Fleet Friendly</div>
-            <div class="trust-text">Custom plans for commercial vehicles.</div>
-          </div>
-        </div>
-
-        <p class="authority">We focus on quality cleaning and scheduled maintenance services.</p>
-      </div>
-    </section>
-
-    <section class="section" id="fleet">
+    <section class="section alt" id="fleet">
       <div class="container">
         <h2>Fleet &amp; Commercial Services</h2>
         <p class="lead">Custom maintenance plans for businesses with multiple vehicles.</p>
@@ -154,14 +193,9 @@
 
         <p class="micro subtle">Designed for businesses managing multiple vehicles — not one-off detailing.</p>
 
-        <a class="btn primary" href="#fleet-form">Fleet Service Request</a>
-      </div>
-    </section>
 
-    <section class="section alt" id="fleet-form">
-      <div class="container">
-        <h2>Fleet Service Request</h2>
-        <p class="lead">Tell us a bit about your fleet and we’ll reach out to discuss a custom cleaning plan.</p>
+        <h3 class="form-heading">Fleet Service Request</h3>
+        <p class="micro subtle">Tell us about your fleet and we’ll reach out with a custom plan.</p>
 
         <form class="form" id="fleetForm">
           <div class="form-grid">
@@ -211,64 +245,54 @@
       </div>
     </section>
 
-    <section class="section" id="how">
+    <section class="section" id="why">
       <div class="container">
-        <h2>How It Works</h2>
-        <p class="lead">Simple. Clear. Professional.</p>
+        <h2>Why Choose 47 Nova Autos LTD</h2>
+        <p class="lead">Consistent results. No shortcuts.</p>
 
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-title">Book or Request</div>
-            <div class="step-text">Book online for retail services, or submit a fleet request for commercial vehicles.</div>
+        <div class="trust">
+          <div class="trust-item">
+            <div class="trust-title">250+ Vehicles</div>
+            <div class="trust-text">Completed cleans and repeat clients.</div>
           </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-title">We Come to You</div>
-            <div class="step-text">Mobile service available. Power access required. Drop-off also available at our location.</div>
+          <div class="trust-item">
+            <div class="trust-title">Local &amp; Reliable</div>
+            <div class="trust-text">Halifax-based service and clear communication.</div>
           </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-title">Drive Clean</div>
-            <div class="step-text">Your vehicle is cleaned and ready to go — no hassle.</div>
+          <div class="trust-item">
+            <div class="trust-title">Professional Work</div>
+            <div class="trust-text">We show up ready and keep it consistent.</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-title">Fleet Friendly</div>
+            <div class="trust-text">Custom plans for commercial vehicles.</div>
           </div>
         </div>
 
-        <div class="two-lines">
-          <div>Serving Halifax and surrounding areas.</div>
-          <div>Drop-off available at <strong><a class="inline" href="https://www.google.com/maps/search/?api=1&query=28+Higgins+Avenue,+Halifax,+NS" target="_blank" rel="noopener">28 Higgins Avenue, Halifax, NS</a></strong>.</div>
-        </div>
+        <p class="authority">We focus on quality cleaning and scheduled maintenance services.</p>
       </div>
     </section>
 
-    <section class="section alt" id="reviews">
+    <section class="section alt" id="faq">
       <div class="container">
-        <h2>What Our Customers Say</h2>
-        <p class="lead">5-Star Rated on Google</p>
+        <h2>Frequently Asked Questions</h2>
+        <p class="lead">Answers to what we get asked most.</p>
 
-        <div class="rating">
-          <span class="stars" aria-label="5 star rating">★★★★★</span>
-          <span class="rating-text">5.0 on Google</span>
-        </div>
+        <div class="faq">
+          <details class="faq-item">
+            <summary>TODO — question 1</summary>
+            <div class="faq-body">TODO — answer 1</div>
+          </details>
 
-        
-        <div class="review-slider" id="reviewSlider" role="region" aria-live="polite" aria-label="Google reviews slideshow">
-          <div class="review-slide" id="reviewSlide">
-            <p id="reviewText">“Car looked brand new inside and out. Highly recommend.”</p>
-            <div class="reviewer" id="reviewName">— Customer</div>
-          </div>
+          <details class="faq-item">
+            <summary>TODO — question 2</summary>
+            <div class="faq-body">TODO — answer 2</div>
+          </details>
 
-          <div class="review-controls">
-            <button class="chip" id="revPrevBtn" type="button" aria-label="Previous review">‹</button>
-            <div class="dots" id="revDots" aria-label="Review dots"></div>
-            <button class="chip" id="revNextBtn" type="button" aria-label="Next review">›</button>
-          </div>
-        </div>
-
-        <p class="micro subtle">5-Star Rated on Google.</p>
-        <div class="review-actions">
-          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=28+Higgins+Avenue,+Halifax,+NS" target="_blank" rel="noopener">View on Google</a>
-          <a class="btn ghost" href="https://www.instagram.com/47_novaautos" target="_blank" rel="noopener">Instagram</a>
+          <details class="faq-item">
+            <summary>TODO — question 3</summary>
+            <div class="faq-body">TODO — answer 3</div>
+          </details>
         </div>
       </div>
     </section>
@@ -299,7 +323,7 @@
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© <span id="year"></span> 47 Nova Autos LTD</span> <span class="micro subtle" style="margin-left:10px;opacity:.6">Build: 1767111081</span>
+        <span>© <span id="year"></span> 47 Nova Autos LTD</span> <span class="micro subtle" style="margin-left:10px;opacity:.6">Build: 1787696628</span>
       </div>
     </footer>
   </main>
@@ -309,6 +333,6 @@
     <a class="fab" href="tel:+17828824395">Call Us</a>
   </div>
 
-  <script src="script.js?v=1767111081"></script>
+  <script src="script.js?v=1787696628"></script>
 </body>
 </html>
