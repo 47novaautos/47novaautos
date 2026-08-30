@@ -72,81 +72,233 @@ document.querySelectorAll("[data-booking]").forEach((el) => {
 
 
 // ----------------------
-// Review slideshow (8 reviews)
+// Google Reviews
 // ----------------------
-const reviews = [
-  { text: "My 2009 Honda Civic looks so much better than before. Highly recommend trusting them with your vehicle.", name: "— Dipanshu C." },
-  { text: "Called in a panic for a last-minute detail and they delivered — even fixed brutal winter salt stains on the mats.", name: "— Rishi U." },
-  { text: "Contacted them on a Saturday, they came the next day. My SUV looks brand new after 4+ hours of work.", name: "— Ashley H." },
-  { text: "The team at 47 Nova Autos took great care of my truck — showed up on time and worked through the rain.", name: "— Chad B." },
-  { text: "Best prices, best customer service, best cleaning. They worked through rain and darkness with a smile.", name: "— Ben L." },
-  { text: "Great job — car smells amazing, and $20 less than most while being more thorough.", name: "— Armanda L." },
-  { text: "Got the Advanced Interior package and I'm 100% satisfied. Professional work done by the team.", name: "— Parmbir S." },
-  { text: "Spent 5 hours detailing my car — it looks brand new. Highly recommend 47 Nova Autos.", name: "— Jeff R." },
-    ];
+// TO ADD OR EDIT A REVIEW: edit the REVIEWS list below. Nothing else to touch.
+//   name / rating (1-5) / text — copied from the review on Google.
+//   date — optional. Leave "" and no date shows. If you ever fill one in as
+//          "2026-06-14", the card shows "2 months ago" and keeps itself
+//          current on every visit.
 
-let reviewIndex = 0;
-const reviewTextEl = document.getElementById("reviewText");
-const reviewNameEl = document.getElementById("reviewName");
+const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/XcQj2XKBAGBGid5o9";
+
+// Your public Google rating. Set GOOGLE_REVIEW_COUNT to your real total to
+// show "Based on N Google reviews"; leave it 0 to hide the count.
+const GOOGLE_RATING = 5.0;
+const GOOGLE_REVIEW_COUNT = 0;
+
+const REVIEWS = [
+  { name: "Dipanshu C.", rating: 5, date: "", text: "My 2009 Honda Civic looks so much better than before. Highly recommend trusting them with your vehicle." },
+  { name: "Rishi U.",    rating: 5, date: "", text: "Called in a panic for a last-minute detail and they delivered — even fixed brutal winter salt stains on the mats." },
+  { name: "Ashley H.",   rating: 5, date: "", text: "Contacted them on a Saturday, they came the next day. My SUV looks brand new after 4+ hours of work." },
+  { name: "Chad B.",     rating: 5, date: "", text: "The team at 47 Nova Autos took great care of my truck — showed up on time and worked through the rain." },
+  { name: "Ben L.",      rating: 5, date: "", text: "Best prices, best customer service, best cleaning. They worked through rain and darkness with a smile." },
+  { name: "Armanda L.",  rating: 5, date: "", text: "Great job — car smells amazing, and $20 less than most while being more thorough." },
+  { name: "Parmbir S.",  rating: 5, date: "", text: "Got the Advanced Interior package and I'm 100% satisfied. Professional work done by the team." },
+  { name: "Jeff R.",     rating: 5, date: "", text: "Spent 5 hours detailing my car — it looks brand new. Highly recommend 47 Nova Autos." },
+];
+
+const G_LOGO_SVG =
+  '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">' +
+  '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
+  '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
+  '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
+  '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+
+const STAR_PATH = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
+
+let starUid = 0;
+function starsHTML(rating, small) {
+  const r = Math.max(0, Math.min(5, Number(rating) || 0));
+  let out = '<span class="g-stars' + (small ? " sm" : "") + '" role="img" aria-label="' +
+    r.toFixed(1) + ' out of 5 stars">';
+  for (let i = 1; i <= 5; i++) {
+    const fill = Math.max(0, Math.min(1, r - (i - 1)));
+    if (fill >= 0.85) {
+      out += '<svg viewBox="0 0 24 24"><path class="g-star-full" d="' + STAR_PATH + '"/></svg>';
+    } else if (fill <= 0.15) {
+      out += '<svg viewBox="0 0 24 24"><path class="g-star-empty" d="' + STAR_PATH + '"/></svg>';
+    } else {
+      const id = "gstar" + (++starUid);
+      out += '<svg viewBox="0 0 24 24"><defs><linearGradient id="' + id + '">' +
+        '<stop offset="' + (fill * 100) + '%" stop-color="#FBBC04"/>' +
+        '<stop offset="' + (fill * 100) + '%" stop-color="rgba(255,255,255,.18)"/>' +
+        '</linearGradient></defs><path fill="url(#' + id + ')" d="' + STAR_PATH + '"/></svg>';
+    }
+  }
+  return out + "</span>";
+}
+
+// "2026-06-14" -> "2 months ago". Recalculated on every page load, so the
+// dates below never need touching again once they are set.
+function relativeTime(dateStr) {
+  if (!dateStr) return null;
+  const then = new Date(dateStr + "T12:00:00").getTime();
+  if (!then || isNaN(then)) return null;
+  const days = Math.floor((Date.now() - then) / 86400000);
+  if (days < 0) return null;
+  if (days < 1) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 7) return days + " days ago";
+  if (days < 14) return "a week ago";
+  if (days < 31) return Math.floor(days / 7) + " weeks ago";
+  if (days < 61) return "a month ago";
+  if (days < 365) return Math.floor(days / 30) + " months ago";
+  if (days < 730) return "a year ago";
+  return Math.floor(days / 365) + " years ago";
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function initials(name) {
+  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return "?";
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
+}
+
+const gRail = document.getElementById("gRail");
+const gScoreEl = document.getElementById("gScore");
+const gStarsEl = document.getElementById("gStars");
+const gCountEl = document.getElementById("gCount");
 const revDotsWrap = document.getElementById("revDots");
 const revPrevBtn = document.getElementById("revPrevBtn");
 const revNextBtn = document.getElementById("revNextBtn");
 
-function renderReviewDots() {
+function cardHTML(r) {
+  const time = relativeTime(r.date);
+  return '<article class="g-card">' +
+    '<div class="g-card-head">' +
+      '<span class="g-avatar-fallback">' + esc(initials(r.name)) + "</span>" +
+      '<div class="g-who"><div class="g-name">' + esc(r.name) + "</div>" +
+        (time ? '<div class="g-time">' + esc(time) + "</div>" : "") +
+      "</div>" +
+      '<span class="g-card-mark" aria-hidden="true">' + G_LOGO_SVG + "</span>" +
+    "</div>" +
+    '<div class="g-card-stars">' + starsHTML(r.rating, true) + "</div>" +
+    '<p class="g-text">' + esc(r.text) + "</p>" +
+    '<div class="g-card-foot"><a class="g-card-link" href="' + esc(GOOGLE_REVIEWS_URL) +
+      '" target="_blank" rel="noopener">View on Google →</a></div>' +
+  "</article>";
+}
+
+function renderReviews(list) {
+  if (!gRail) return;
+  gRail.innerHTML = list.map(cardHTML).join("");
+
+  gRail.querySelectorAll(".g-text").forEach((p) => {
+    if (p.scrollHeight - p.clientHeight < 4) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "g-more";
+    btn.textContent = "Read more";
+    btn.addEventListener("click", () => {
+      const open = p.classList.toggle("is-open");
+      btn.textContent = open ? "Show less" : "Read more";
+    });
+    p.insertAdjacentElement("afterend", btn);
+  });
+
+  buildDots();
+  updateArrows();
+  startAuto();
+}
+
+function renderSummary() {
+  if (gScoreEl) gScoreEl.textContent = Number(GOOGLE_RATING).toFixed(1);
+  if (gStarsEl) gStarsEl.innerHTML = starsHTML(GOOGLE_RATING);
+  if (gCountEl) {
+    gCountEl.textContent = GOOGLE_REVIEW_COUNT > 0
+      ? "Based on " + GOOGLE_REVIEW_COUNT + " Google review" + (GOOGLE_REVIEW_COUNT === 1 ? "" : "s")
+      : "Rated by our customers on Google";
+  }
+}
+
+// ---- Rail controls ----
+function cardStep() {
+  const card = gRail && gRail.querySelector(".g-card");
+  if (!card) return 340;
+  const gap = parseFloat(getComputedStyle(gRail).columnGap || "14") || 14;
+  return card.getBoundingClientRect().width + gap;
+}
+
+function pageCount() {
+  if (!gRail) return 0;
+  return Math.max(1, Math.ceil((gRail.scrollWidth - gRail.clientWidth) / cardStep()) + 1);
+}
+
+function currentPage() {
+  return gRail ? Math.round(gRail.scrollLeft / cardStep()) : 0;
+}
+
+function buildDots() {
   if (!revDotsWrap) return;
+  const n = pageCount();
   revDotsWrap.innerHTML = "";
-  reviews.forEach((_, i) => {
+  if (n <= 1) return;
+  for (let i = 0; i < n; i++) {
     const b = document.createElement("button");
     b.type = "button";
-    b.className = "dot" + (i === reviewIndex ? " active" : "");
-    b.setAttribute("aria-label", `Go to review ${
-      i + 1
-    }`);
+    b.className = "dot" + (i === currentPage() ? " active" : "");
+    b.setAttribute("aria-label", "Go to review " + (i + 1));
     b.addEventListener("click", () => {
-      reviewIndex = i;
-      showReview();
-      restartReviewAuto();
+      gRail.scrollTo({ left: i * cardStep(), behavior: "smooth" });
+      restartAuto();
     });
     revDotsWrap.appendChild(b);
-  });
+  }
 }
 
-function showReview() {
-  if (!reviewTextEl || !reviewNameEl) return;
-  const r = reviews[reviewIndex];
-  reviewTextEl.textContent = r.text;
-  reviewNameEl.textContent = r.name;
-  renderReviewDots();
+function syncDots() {
+  if (!revDotsWrap) return;
+  const cur = currentPage();
+  revDotsWrap.querySelectorAll(".dot").forEach((d, i) => d.classList.toggle("active", i === cur));
 }
 
-function nextReview() {
-  reviewIndex = (reviewIndex + 1) % reviews.length;
-  showReview();
+function updateArrows() {
+  if (!gRail) return;
+  const atStart = gRail.scrollLeft <= 2;
+  const atEnd = gRail.scrollLeft >= gRail.scrollWidth - gRail.clientWidth - 2;
+  if (revPrevBtn) revPrevBtn.disabled = atStart;
+  if (revNextBtn) revNextBtn.disabled = atEnd;
+  const wrap = gRail.closest(".g-rail-wrap");
+  if (wrap) wrap.classList.toggle("is-scrolled", !atStart);
 }
 
-function prevReview() {
-  reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
-  showReview();
+function slide(dir) {
+  if (!gRail) return;
+  const atEnd = gRail.scrollLeft >= gRail.scrollWidth - gRail.clientWidth - 2;
+  if (dir > 0 && atEnd) gRail.scrollTo({ left: 0, behavior: "smooth" });
+  else gRail.scrollBy({ left: dir * cardStep(), behavior: "smooth" });
 }
 
-if (revPrevBtn) revPrevBtn.addEventListener("click", () => {
-  prevReview();
-  restartReviewAuto();
-});
-if (revNextBtn) revNextBtn.addEventListener("click", () => {
-  nextReview();
-  restartReviewAuto();
-});
+if (revPrevBtn) revPrevBtn.addEventListener("click", () => { slide(-1); restartAuto(); });
+if (revNextBtn) revNextBtn.addEventListener("click", () => { slide(1); restartAuto(); });
 
-let reviewTimer = null;
-function restartReviewAuto() {
-  if (reviewTimer) window.clearInterval(reviewTimer);
-  reviewTimer = window.setInterval(nextReview, 5000);
+let autoTimer = null;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function startAuto() {
+  if (reduceMotion || !gRail) return;
+  stopAuto();
+  autoTimer = window.setInterval(() => slide(1), 6000);
 }
+function stopAuto() { if (autoTimer) { window.clearInterval(autoTimer); autoTimer = null; } }
+function restartAuto() { startAuto(); }
 
-if (reviews.length && reviewTextEl && reviewNameEl) {
-  showReview();
-  restartReviewAuto();
+if (gRail) {
+  gRail.addEventListener("scroll", () => { syncDots(); updateArrows(); }, { passive: true });
+  gRail.addEventListener("mouseenter", stopAuto);
+  gRail.addEventListener("mouseleave", startAuto);
+  gRail.addEventListener("focusin", stopAuto);
+  gRail.addEventListener("touchstart", stopAuto, { passive: true });
+  window.addEventListener("resize", () => { buildDots(); updateArrows(); });
+
+  renderSummary();
+  renderReviews(REVIEWS);
 }
 
 // ----------------------
