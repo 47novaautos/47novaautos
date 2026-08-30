@@ -556,3 +556,178 @@ input:focus{border-color:rgba(255,42,42,.65)}
 /* Anchor targets clear the sticky header */
 html{scroll-padding-top:104px;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ==========================================================
+   Google Reviews — live section
+   ========================================================== */
+:root{
+  --g-star:#FBBC04;
+  --g-blue:#4285F4;
+}
+
+/* --- Summary bar --- */
+.g-summary{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px 26px;
+  margin:20px auto 0;
+  max-width:760px;
+  padding:18px 22px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  box-shadow:var(--shadow);
+}
+.g-summary-head{display:flex;align-items:center;gap:10px}
+.g-logo{display:inline-flex;width:26px;height:26px;flex:none}
+.g-logo svg{width:100%;height:100%;display:block}
+.g-summary-title{font-weight:800;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+
+.g-summary-body{display:flex;align-items:center;gap:14px;text-align:left}
+.g-score{
+  font-size:40px;line-height:1;font-weight:900;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+}
+.g-summary-meta{display:flex;flex-direction:column;gap:4px}
+.g-count{color:var(--muted);font-size:13px}
+
+.g-summary-cta{
+  display:inline-flex;align-items:center;
+  padding:10px 16px;border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  font-weight:800;font-size:14px;white-space:nowrap;
+  transition:background .18s ease, border-color .18s ease;
+}
+.g-summary-cta:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22)}
+
+/* --- Stars --- */
+.g-stars{display:inline-flex;gap:2px;line-height:0}
+.g-stars svg{width:18px;height:18px;display:block}
+.g-stars.sm svg{width:15px;height:15px}
+.g-star-full,.g-star-half-l{fill:var(--g-star)}
+.g-star-empty,.g-star-half-r{fill:rgba(255,255,255,.18)}
+
+/* --- Rail --- */
+.g-rail-wrap{position:relative;margin-top:22px}
+.g-rail{
+  display:flex;gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:4px 2px 14px;
+  scrollbar-width:none;
+}
+.g-rail::-webkit-scrollbar{display:none}
+.g-skeleton{display:flex;gap:14px}
+
+.g-card{
+  scroll-snap-align:start;
+  flex:0 0 340px;
+  max-width:340px;
+  display:flex;flex-direction:column;
+  text-align:left;
+  padding:16px 16px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.035);
+  transition:border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.g-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.g-card.is-loading{
+  min-height:190px;
+  background:linear-gradient(100deg, rgba(255,255,255,.03) 30%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.03) 70%);
+  background-size:220% 100%;
+  animation:gShimmer 1.4s infinite linear;
+}
+@keyframes gShimmer{from{background-position:120% 0}to{background-position:-20% 0}}
+
+.g-card-head{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.g-avatar{
+  width:40px;height:40px;flex:none;border-radius:50%;
+  object-fit:cover;background:rgba(255,255,255,.1);
+}
+.g-avatar-fallback{
+  width:40px;height:40px;flex:none;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:16px;color:#fff;
+  background:var(--g-blue);
+}
+.g-who{min-width:0;flex:1}
+.g-name{font-weight:800;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-time{color:var(--muted);font-size:12.5px;margin-top:1px}
+.g-card-mark{width:18px;height:18px;flex:none;opacity:.95}
+.g-card-mark svg{width:100%;height:100%;display:block}
+
+.g-card-stars{margin-bottom:9px}
+.g-text{
+  color:var(--text);font-size:14.5px;line-height:1.55;margin:0;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden;
+}
+.g-text.is-open{-webkit-line-clamp:unset;display:block}
+.g-more{
+  align-self:flex-start;margin-top:8px;padding:0;
+  background:none;border:0;cursor:pointer;
+  color:var(--muted);font-size:13px;font-weight:800;
+  text-decoration:underline;text-underline-offset:3px;
+}
+.g-more:hover{color:var(--text)}
+.g-card-foot{margin-top:auto;padding-top:12px}
+.g-card-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--muted);font-size:12.5px;font-weight:700;
+}
+.g-card-link:hover{color:var(--text)}
+
+/* --- Arrows --- */
+.g-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  z-index:5;
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;line-height:1;
+  color:var(--text);
+  border:1px solid var(--border);
+  background:rgba(15,15,15,.92);
+  backdrop-filter:blur(6px);
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:background .18s ease, opacity .18s ease;
+}
+.g-arrow:hover{background:rgba(40,40,40,.95)}
+.g-arrow[disabled]{opacity:0;pointer-events:none}
+.g-arrow-prev{left:-18px}
+.g-arrow-next{right:-18px}
+
+/* edge fades so cards slide under the arrows cleanly */
+.g-rail-wrap::before,.g-rail-wrap::after{
+  content:"";position:absolute;top:0;bottom:14px;width:44px;
+  pointer-events:none;z-index:4;
+}
+.g-rail-wrap::before{left:0;width:34px;background:linear-gradient(90deg,var(--bg),transparent);opacity:0;transition:opacity .2s ease}
+.g-rail-wrap.is-scrolled::before{opacity:1}
+.g-rail-wrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.section.alt .g-rail-wrap::before{background:linear-gradient(90deg,var(--alt),transparent)}
+.section.alt .g-rail-wrap::after{background:linear-gradient(270deg,var(--alt),transparent)}
+
+@media (max-width: 1200px){
+  .g-arrow-prev{left:2px}
+  .g-arrow-next{right:2px}
+}
+
+.g-attrib{
+  margin-top:16px;
+  color:var(--muted);font-size:11.5px;opacity:.62;
+  max-width:60ch;margin-left:auto;margin-right:auto;
+}
+
+@media (max-width: 720px){
+  .g-summary{gap:14px;padding:16px}
+  .g-summary-body{gap:12px}
+  .g-score{font-size:34px}
+  .g-card{flex:0 0 84vw;max-width:84vw}
+  .g-arrow{display:none}
+  .g-rail{scroll-padding-left:2px}
+}
