@@ -327,7 +327,7 @@ async function postFleet(form) {
   // Fallback: open email compose
   const fleetSize = data.get("fleet_size") || "";
   const frequency = data.get("frequency") || "";
-  const vehicleTypes = getCheckedValues(form, "vehicle_type").join(", ") || "N/A";
+  const vehicleTypes = String(data.get("vehicle_type") || "").trim() || "N/A";
   const name = String(data.get("name") || "").trim();
   const phone = String(data.get("phone") || "").trim();
   const email = String(data.get("email") || "").trim();
