@@ -261,18 +261,16 @@
           <div class="form-grid">
             <fieldset class="fieldset">
               <legend>Number of Vehicles</legend>
-              <label class="radio"><input type="radio" name="fleet_size" value="1-5" required /> 1–5</label>
-              <label class="radio"><input type="radio" name="fleet_size" value="5-10" /> 5–10</label>
-              <label class="radio"><input type="radio" name="fleet_size" value="10+" /> 10+</label>
+              <label>How many vehicles?
+                <input type="text" name="fleet_size" placeholder="e.g. 1, 3, or six" required />
+              </label>
             </fieldset>
 
             <fieldset class="fieldset">
               <legend>Vehicle Type</legend>
-              <label class="check"><input type="checkbox" name="vehicle_type" value="Minivans" /> Minivans</label>
-              <label class="check"><input type="checkbox" name="vehicle_type" value="Pickup Trucks" /> Pickup Trucks</label>
-              <label class="check"><input type="checkbox" name="vehicle_type" value="Cargo Vans" /> Cargo Vans</label>
-              <label class="check"><input type="checkbox" name="vehicle_type" value="Combination" /> Combination of vehicle types</label>
-              <label class="check"><input type="checkbox" name="vehicle_type" value="Other" /> Other</label>
+              <label>What do you drive?
+                <input type="text" name="vehicle_type" placeholder="e.g. Cargo van, F-150, Civic" required />
+              </label>
             </fieldset>
 
             <fieldset class="fieldset">
