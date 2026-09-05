@@ -734,3 +734,35 @@ html{scroll-padding-top:104px;scroll-behavior:smooth}
   .g-arrow{display:none}
   .g-rail{scroll-padding-left:2px}
 }
+
+
+/* ---------- Maintenance plan benefits ---------- */
+.plan-benefits{
+  list-style:none;
+  margin:26px auto 0;
+  padding:0;
+  max-width:900px;
+  display:grid;
+  gap:12px;
+  text-align:left;
+}
+.plan-benefits li{
+  position:relative;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.03);
+  padding:14px 16px 14px 20px;
+}
+.plan-benefits li::before{
+  content:"";
+  position:absolute;
+  left:10px;top:16px;bottom:16px;
+  width:3px;
+  border-radius:3px;
+  background:var(--red);
+}
+.benefit-title{display:block;font-weight:850}
+.benefit-text{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+@media (min-width:760px){
+  .plan-benefits{grid-template-columns:1fr 1fr}
+}
