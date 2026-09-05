@@ -332,9 +332,9 @@ async function postFleet(form) {
   const phone = String(data.get("phone") || "").trim();
   const email = String(data.get("email") || "").trim();
 
-  const subject = encodeURIComponent("Fleet Service Request — 47 Nova Autos LTD");
+  const subject = encodeURIComponent("Maintenance Plan Request — 47 Nova Autos LTD");
   const body = encodeURIComponent(
-`Fleet Size: ${fleetSize}
+`Number of Vehicles: ${fleetSize}
 Vehicle Types: ${vehicleTypes}
 Frequency: ${frequency}
 
