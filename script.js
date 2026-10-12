@@ -491,3 +491,26 @@ if (coverageSection && "IntersectionObserver" in window) {
   }, { rootMargin: "300px" });
   io.observe(coverageSection);
 }
+
+// Services: detailing category toggle + tabs
+(() => {
+  const toggle = document.getElementById("detailingToggle");
+  const wrap = document.getElementById("detailingPanel");
+  if (!toggle || !wrap) return;
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    wrap.hidden = open;
+  });
+  const tabs = wrap.querySelectorAll(".svc-tab");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", String(on));
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+    });
+  });
+})();
