@@ -783,8 +783,6 @@ html{scroll-padding-top:104px;scroll-behavior:smooth}
 .svc-cat-title{font-size:26px;font-weight:850;letter-spacing:-.01em}
 .svc-cat-intro{color:var(--muted);max-width:580px}
 .svc-cat-cta{color:var(--red);font-weight:750;font-size:14px}
-.svc-chev{display:inline-block;transition:transform .2s}
-.svc-category[aria-expanded="true"] .svc-chev{transform:rotate(180deg)}
 .svc-wrap{max-width:760px;margin:16px auto 0}
 .svc-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
 .svc-tab{
@@ -808,3 +806,21 @@ html{scroll-padding-top:104px;scroll-behavior:smooth}
 .svc-note{color:var(--red);font-weight:700;font-size:14px;margin:14px 0 0}
 .svc-panel .btn{margin-top:18px}
 @media (max-width:520px){.svc-tab{padding:9px 12px;font-size:13px}.svc-price{min-width:120px}}
+
+/* Services: category links + subpages */
+.svc-cats{display:grid;grid-template-columns:1fr;gap:16px;max-width:980px;margin:22px auto 0}
+.svc-cats .svc-category{margin:0;height:100%;text-decoration:none}
+@media (min-width:760px){.svc-cats{grid-template-columns:1fr 1fr}}
+a.svc-category{text-decoration:none;text-align:center}
+a.svc-category:hover .svc-cat-cta{text-decoration:underline}
+.svc-cat-from{font-size:13px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--text);opacity:.85}
+.page-hero{padding:56px 0 8px;text-align:center}
+.page-title{font-size:clamp(32px,6vw,48px);margin:10px 0 12px;letter-spacing:-.02em}
+.crumbs{font-size:13px;color:var(--muted)}
+.crumbs a{color:var(--muted)}
+.crumbs a:hover{color:var(--text)}
+.crumbs [aria-current]{color:var(--red);font-weight:700}
+.svc-page{padding-top:28px;text-align:center}
+.svc-tax{text-align:center;margin-top:14px}
+.svc-crosslink{margin-top:36px}
+.nav a[aria-current="page"],.mobile-menu a[aria-current="page"]{color:var(--text)}

@@ -6,7 +6,7 @@
   <title>47 Nova Autos LTD — Mobile Auto Cleaning</title>
   <meta name="description" content="Professional mobile auto cleaning in Halifax & surrounding areas. Retail interior packages, exterior wash, and custom maintenance plans for personal and commercial vehicles." />
   <link rel="icon" href="images/logo.png" />
-  <link rel="stylesheet" href="style.css?v=1791850000" />
+  <link rel="stylesheet" href="style.css?v=1792000000" />
 </head>
 <body>
   <header class="header">
@@ -140,85 +140,19 @@
         <h2>Services</h2>
         <p class="lead">Everything we offer, with clear pricing. All prices include tax.</p>
 
-        <button class="svc-category" type="button" id="detailingToggle" aria-expanded="false" aria-controls="detailingPanel">
-          <span class="svc-cat-title">Detailing</span>
-          <span class="svc-cat-intro">Hand detailing done at your home, your work, or our drop-off spot at 28 Higgins Avenue. We bring our own water and power, take our time on every vehicle, and leave it cleaner than you expected.</span>
-          <span class="svc-cat-cta">View detailing services <span class="svc-chev" aria-hidden="true">&#9662;</span></span>
-        </button>
-
-        <div class="svc-wrap" id="detailingPanel" hidden>
-          <div class="svc-tabs" role="tablist" aria-label="Detailing services">
-          <button class="svc-tab is-active" type="button" role="tab" id="tab-exterior" aria-controls="panel-exterior" aria-selected="true">Exterior</button>
-          <button class="svc-tab" type="button" role="tab" id="tab-interior" aria-controls="panel-interior" aria-selected="false">Interior</button>
-          <button class="svc-tab" type="button" role="tab" id="tab-full" aria-controls="panel-full" aria-selected="false">Full Detail</button>
-          <button class="svc-tab" type="button" role="tab" id="tab-additional" aria-controls="panel-additional" aria-selected="false">Additional Services</button>
-          </div>
-
-          <div class="svc-panel" id="panel-exterior" role="tabpanel" aria-labelledby="tab-exterior">
-            <h3>Exterior Hand Wash</h3>
-            <p class="svc-desc">A careful hand wash that lifts road grime and brings the shine back to your paint, wheels and tires.</p>
-            <ul class="svc-list">
-              <li>Hand wash &amp; rinse</li>
-              <li>Wheels &amp; tires cleaned</li>
-              <li>Tire dressing</li>
-              <li>Exterior dry</li>
-            </ul>
-            <div class="svc-prices">
-              <div class="svc-price"><span class="svc-amt">$70</span><span class="svc-lab">Sedan</span></div>
-              <div class="svc-price"><span class="svc-amt">$85</span><span class="svc-lab">SUV / Truck</span></div>
-            </div>
-            <a class="btn primary full" href="#" data-booking>Book Exterior Hand Wash</a>
-          </div>
-
-          <div class="svc-panel" id="panel-interior" role="tabpanel" aria-labelledby="tab-interior" hidden>
-            <h3>Deep Interior Clean</h3>
-            <p class="svc-desc">A full interior reset for daily-driven vehicles. Seats, carpets, vents and every surface get cleaned by hand.</p>
-            <ul class="svc-list">
-              <li>Full interior vacuum</li>
-              <li>Deep cleaning of seats &amp; carpets</li>
-              <li>Steam cleaning of the vents</li>
-              <li>Detailed surface cleaning</li>
-              <li>Stain treatment</li>
-            </ul>
-            <div class="svc-prices">
-              <div class="svc-price"><span class="svc-amt">$150</span><span class="svc-lab">Sedan</span></div>
-              <div class="svc-price"><span class="svc-amt">$170</span><span class="svc-lab">SUV / Truck</span></div>
-            </div>
-            <a class="btn primary full" href="#" data-booking>Book Deep Interior Clean</a>
-          </div>
-
-          <div class="svc-panel" id="panel-full" role="tabpanel" aria-labelledby="tab-full" hidden>
-            <h3>Full Reset</h3>
-            <p class="svc-desc">Our complete inside-and-out detail. Everything in the Deep Interior Clean plus a full exterior hand wash.</p>
-            <ul class="svc-list">
-              <li>Everything in Deep Interior Clean</li>
-              <li>Exterior hand wash &amp; dry</li>
-              <li>Wheels &amp; tires cleaned + tire dressing</li>
-              <li>Complete interior &amp; exterior refresh</li>
-            </ul>
-            <div class="svc-prices">
-              <div class="svc-price"><span class="svc-amt">$170</span><span class="svc-lab">Sedan</span></div>
-              <div class="svc-price"><span class="svc-amt">$190</span><span class="svc-lab">SUV / Truck</span></div>
-            </div>
-            <p class="svc-note">Most popular</p>
-            <a class="btn primary full" href="#" data-booking>Book Full Reset</a>
-          </div>
-
-          <div class="svc-panel" id="panel-additional" role="tabpanel" aria-labelledby="tab-additional" hidden>
-            <h3>Headlight Restoration</h3>
-            <p class="svc-desc">Cloudy, yellowed headlights make a car look older and cut your visibility at night. We restore them to clear and seal them.</p>
-            <ul class="svc-list">
-              <li>Removes haze &amp; yellowing</li>
-              <li>Restores clarity</li>
-              <li>UV protection</li>
-            </ul>
-            <div class="svc-prices">
-              <div class="svc-price"><span class="svc-amt">$60</span><span class="svc-lab">Both headlights</span></div>
-            </div>
-            <p class="svc-note">Add it to any package and save $20.</p>
-            <a class="btn primary full" href="#" data-booking>Book Headlight Restoration</a>
-          </div>
-
+        <div class="svc-cats">
+          <a class="svc-category" href="detailing.html">
+            <span class="svc-cat-title">Detailing</span>
+            <span class="svc-cat-intro">Exterior hand wash, deep interior clean and our Full Reset. Done at your home, your work, or our drop-off spot at 28 Higgins Avenue.</span>
+            <span class="svc-cat-from">From $70</span>
+            <span class="svc-cat-cta">View detailing services <span aria-hidden="true">&rarr;</span></span>
+          </a>
+          <a class="svc-category" href="additional-services.html">
+            <span class="svc-cat-title">Additional Services</span>
+            <span class="svc-cat-intro">Targeted add-ons like headlight restoration. Book on their own or add to any detailing package and save.</span>
+            <span class="svc-cat-from">From $60</span>
+            <span class="svc-cat-cta">View additional services <span aria-hidden="true">&rarr;</span></span>
+          </a>
         </div>
       </div>
     </section>
@@ -418,6 +352,6 @@
     <a class="fab" href="tel:+17828824395">Call Us</a>
   </div>
 
-  <script src="script.js?v=1791850000"></script>
+  <script src="script.js?v=1792000000"></script>
 </body>
 </html>
